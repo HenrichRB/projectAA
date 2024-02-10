@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.main-nav {
+    height: 36px;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5em;
+    justify-content: center;
+    align-items: center;
+}
