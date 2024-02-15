@@ -5,7 +5,7 @@ async function obterLinhaDeOnibus() {
         const response = await fetch(urlBusLines);
         
         if (!response.ok) {
-            throw new Error('Não foi possivel obter as informações das linhas de ônibus')
+            throw new Error('Não foi possivel obter as informações das linhas de ônibus');
         }
         
         const data = await response.json();
@@ -19,8 +19,20 @@ async function obterLinhaDeOnibus() {
     }
 }
 
-obterLinhaDeOnibus().then(numberAndNames => {
-    if (numberAndNames) {
-        console.log(numberAndNames);
+function preencherListaLinhas(numerosENomes) {
+    const datalist = document.getElementById('listaLinhas');
+    
+    datalist.innerHTML = '';
+
+    numerosENomes.forEach(numeroNome => {
+        const option = document.createElement('option');
+        option.value = numeroNome;
+        datalist.appendChild(option);
+    });
+}
+
+obterLinhaDeOnibus().then(numerosENomes => {
+    if (numerosENomes) {
+        preencherListaLinhas(numerosENomes);
     }
 });
