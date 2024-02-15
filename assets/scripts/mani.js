@@ -31,6 +31,11 @@ function preencherListaLinhas(numerosENomes) {
     });
 }
 
+document.getElementById('buttonSearch').addEventListener('click', function() {
+    const inpuValue = document.getElementById('meuInput').value;
+    console.log('Valor do input:', inpuValue);
+})
+
 obterLinhaDeOnibus().then(numerosENomes => {
     if (numerosENomes) {
         preencherListaLinhas(numerosENomes);
