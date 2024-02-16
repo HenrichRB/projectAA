@@ -10,21 +10,21 @@ async function obterLinhaDeOnibus() {
         
         const data = await response.json();
 
-        const numberAndNames = data.map(linha => `${linha.numero} - ${linha.nome}`);
+        const numbersAndNames = data.map(linha => `${linha.numero} - ${linha.nome}`);
 
-        return numberAndNames;
+        return numbersAndNames;
     } catch (error) {
         console.error('Erro ao obter as informações das linhas de ônibus', error);
         return null;
     }
 }
 
-function preencherListaLinhas(numerosENomes) {
+function preencherListaLinhas(numbersAndNames) {
     const datalist = document.getElementById('listaLinhas');
     
     datalist.innerHTML = '';
 
-    numerosENomes.forEach(numeroNome => {
+    numbersAndNames.forEach(numeroNome => {
         const option = document.createElement('option');
         option.value = numeroNome;
         datalist.appendChild(option);
@@ -36,8 +36,8 @@ document.getElementById('buttonSearch').addEventListener('click', function() {
     console.log('Valor do input:', inpuValue);
 })
 
-obterLinhaDeOnibus().then(numerosENomes => {
-    if (numerosENomes) {
-        preencherListaLinhas(numerosENomes);
+obterLinhaDeOnibus().then(numbersAndNames => {
+    if (numbersAndNames) {
+        preencherListaLinhas(numbersAndNames);
     }
 });
