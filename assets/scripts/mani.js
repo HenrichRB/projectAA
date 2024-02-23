@@ -31,10 +31,10 @@ function preencherListaLinhas(numbersAndNames) {
     });
 }
 
-document.getElementById('buttonSearch').addEventListener('click', function () {
-    const inputValue = document.getElementById('meuInput').value;
-    console.log('Valor do input:', inputValue);
-})
+// document.getElementById('buttonSearch').addEventListener('click', function () {
+//     const inputValue = document.getElementById('meuInput').value;
+//     console.log('Valor do input:', inputValue);
+// })
 
 obterLinhaDeOnibus().then(numbersAndNames => {
     if (numbersAndNames) {
