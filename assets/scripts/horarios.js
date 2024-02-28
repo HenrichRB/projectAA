@@ -11,26 +11,16 @@ async function obterHorariosDosOnibus(numeroLinha) {
             throw new Error('Não foi possível obter as informações dos horários do ônibus');
         }
 
-        const data = await response.text();
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(data, 'text/xml');
+        const data = await response.json();
 
-        const horariosSaida = [];
-
-        const horariosSaidaNodes = xmlDoc.getElementsByTagName('horariosSaida');
-        for (let i = 0; i < horariosSaidaNodes.length; i++) {
-            const horariosSaidaNode = horariosSaidaNodes[i];
-            const postoControle = horariosSaidaNode.getElementsByTagName('postoControle')[0].textContent;
-            const saidas =  horariosSaidaNode.getElementsByTagName('saida');
-            const horarios = [];
-            for (let c = 0; c < saidas.length; c++) {
-                const saida = saidas[c];
-                const horario = saida.getElementsByTagName('horario')[0].textContent;
-                const acessivel = saida.getElementsByTagName('acessivel')[0].textContent;
-                horarios.push({horario, acessivel});
-            }
-            horariosSaida.push({postoControle, horarios});
-        }
+        const horariosSaida = data.map(item => {
+            const postoControle = item.postoControle;
+            const horarios = item.horarios.map(saida => ({
+                horario: saida.horario,
+                acessivel: saida.acessivel
+            }));
+            return { postoControle, horarios}
+        });
 
         return horariosSaida;
     } catch (error) {
@@ -50,10 +40,14 @@ document.getElementById('buttonSearch').addEventListener('click', async function
     }
 
     try {
-        const horarios = await obterHorariosDosOnibus(numeroLinha);
+        const horariosArray = await obterHorariosDosOnibus(numeroLinha);
 
-        if (horarios) {
-            console.log('Horários de saída agrupados por posto de controle:', horarios.postoControle);
+        if (horariosArray) {
+            horariosArray.forEach(horario => {
+                console.log(`Horaios de saida agrupados por posto de controle: ${horario.postoControle}`);
+                console.log(horario.horarios)
+            })
+            
         }
     } catch (error) {
         console.error('Erro ao buscar os horários:', error);
