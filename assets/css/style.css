@@ -8,13 +8,36 @@ a {
     text-decoration: none;
 }
 
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #202124;
+    color: #fff;
+    text-align: center;
+    padding: 0.5em 0;
+    font-size: 0.8em;
+}
+
 .main-nav {
-    height: 36px;
     display: flex;
     flex-direction: row;
     gap: 1.5em;
     justify-content: center;
     align-items: center;
+    height: 3em;
+    background-color: #4F4F4F;
+}
+
+.main-nav > a {
+    color: white;
+    font-weight: 500;
+    padding: 0.5em;
+}
+
+.main-nav > a:hover {
+    color: #000;
 }
 
 .input-loading {
