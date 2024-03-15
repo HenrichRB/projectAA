@@ -19,14 +19,20 @@ async function obterLinhaDeOnibus() {
 
         const numbersAndNames = data.map(linha => `${linha.numero} - ${linha.nome}`);
 
+        inputLoading.classList.remove('input-loading');
+        buttonLoading.classList.remove('input-loading')
+
         return numbersAndNames;
     } catch (error) {
         console.error('Erro ao obter as informações das linhas de ônibus', error);
+
+        loadingIndicador.style.display = 'none';
+        inputLoading.classList.remove('input-loading');
+        inputLoading.style.display = 'none';
+
         return null;
     } finally {
-        loadingIndicador.style.display = 'none'
-        inputLoading.classList.remove('input-loading');
-        buttonLoading.classList.remove('input-loading')
+        loadingIndicador.style.display = 'none';
     }
 }
 
