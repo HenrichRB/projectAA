@@ -1,7 +1,14 @@
 const urlBusLines = 'http://gistapis.etufor.ce.gov.br:8081/api/linhas/';
+const loadingIndicador = document.getElementById('loadingIndicador');
+const inputLoading = document.getElementById('meuInput');
+const buttonLoading = document.getElementById('buttonSearch')
 
 async function obterLinhaDeOnibus() {
     try {
+        loadingIndicador.style.display = 'block'
+        inputLoading.classList.add('input-loading');
+        buttonLoading.classList.add('input-loading');
+
         const response = await fetch(urlBusLines);
 
         if (!response.ok) {
@@ -16,6 +23,10 @@ async function obterLinhaDeOnibus() {
     } catch (error) {
         console.error('Erro ao obter as informações das linhas de ônibus', error);
         return null;
+    } finally {
+        loadingIndicador.style.display = 'none'
+        inputLoading.classList.remove('input-loading');
+        buttonLoading.classList.remove('input-loading')
     }
 }
 
@@ -30,11 +41,6 @@ function preencherListaLinhas(numbersAndNames) {
         datalist.appendChild(option);
     });
 }
-
-// document.getElementById('buttonSearch').addEventListener('click', function () {
-//     const inputValue = document.getElementById('meuInput').value;
-//     console.log('Valor do input:', inputValue);
-// })
 
 obterLinhaDeOnibus().then(numbersAndNames => {
     if (numbersAndNames) {
