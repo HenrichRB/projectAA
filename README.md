@@ -6,3 +6,4 @@ Este projeto visa a criação de um site para consulta de horários das saidas d
 Utilizando a API fornecida pela Etufor (empresa responsavel pelos ônibus de Fortaleza).
 - (http://gistapis.etufor.ce.gov.br:8081/api/linhas/) - utilizada para fornecimento das linhas.
 - (http://gistapis.etufor.ce.gov.br:8081/api/horarios/216?data=20240209) - Utilizada para o fornecimento dos postos de controles e horários das linhas.
+- (http://www.etufor.ce.gov.br/GIST/linHorarios.htm) - Site já existente da prefeitura que utiliza a API
