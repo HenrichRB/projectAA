@@ -58,7 +58,7 @@ footer {
     height: 30px;
 }
 
-@media screen and (min-width: 320px) and (max-width: 425px) {
+@media screen and (max-width: 430px) {
     #meuInput {
         width: 200px;
         margin-top: 3em;
