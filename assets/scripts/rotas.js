@@ -1,15 +1,15 @@
-const urlLinhaOnibus = 'http://gistapis.etufor.ce.gov.br:8081/api/linhas/';
-const IndicadorDeLoading = document.getElementById('IndicadorDeLoading');
+const urlBusLines = 'http://gistapis.etufor.ce.gov.br:8081/api/linhas/';
+const loadingIndicador = document.getElementById('loadingIndicador');
 const inputLoading = document.getElementById('meuInput');
 const buttonLoading = document.getElementById('buttonSearch')
 
 async function obterLinhaDeOnibus() {
     try {
-        IndicadorDeLoading.style.display = 'block'
+        loadingIndicador.style.display = 'block'
         inputLoading.classList.add('input-loading');
         buttonLoading.classList.add('input-loading');
 
-        const response = await fetch(urlLinhaOnibus);
+        const response = await fetch(urlBusLines);
 
         if (!response.ok) {
             throw new Error('Não foi possivel obter as informações das linhas de ônibus');
@@ -17,39 +17,39 @@ async function obterLinhaDeOnibus() {
 
         const data = await response.json();
 
-        const NumeroENomeLinha = data.map(linha => `${linha.numero} - ${linha.nome}`);
+        const numbersAndNames = data.map(linha => `${linha.numero} - ${linha.nome}`);
 
         inputLoading.classList.remove('input-loading');
         buttonLoading.classList.remove('input-loading')
 
-        return NumeroENomeLinha;
+        return numbersAndNames;
     } catch (error) {
         console.error('Erro ao obter as informações das linhas de ônibus', error);
 
-        IndicadorDeLoading.style.display = 'none';
+        loadingIndicador.style.display = 'none';
         inputLoading.classList.remove('input-loading');
         inputLoading.style.display = 'none';
 
         return null;
     } finally {
-        IndicadorDeLoading.style.display = 'none';
+        loadingIndicador.style.display = 'none';
     }
 }
 
-function preencherListaLinhas(NumeroENomeLinha) {
+function preencherListaLinhas(numbersAndNames) {
     const datalist = document.getElementById('listaLinhas');
 
     datalist.innerHTML = '';
 
-    NumeroENomeLinha.forEach(numberName => {
+    numbersAndNames.forEach(numberName => {
         const option = document.createElement('option');
         option.value = numberName;
         datalist.appendChild(option);
     });
 }
 
-obterLinhaDeOnibus().then(NumeroENomeLinha => {
-    if (NumeroENomeLinha) {
-        preencherListaLinhas(NumeroENomeLinha);
+obterLinhaDeOnibus().then(numbersAndNames => {
+    if (numbersAndNames) {
+        preencherListaLinhas(numbersAndNames);
     }
 });
